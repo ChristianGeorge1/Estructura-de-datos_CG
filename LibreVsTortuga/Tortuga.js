@@ -3,8 +3,6 @@ export default class Tortuga{
         this._nombre = nombre;
         this._posicion = 0;
     }
-
-
     get nombre(){
         return this._nombre;
     }
@@ -24,5 +22,8 @@ export default class Tortuga{
             this._posicion += 1;
         }
         return tramo;
+    }
+    toString(){
+        return `El nombre de la tortuga es: ${this.nombre}`
     }
 }
