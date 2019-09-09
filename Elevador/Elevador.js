@@ -41,18 +41,33 @@ export default class Elevador {
             }
         }
     }
+    imagenAbrirPuerta(){
+        let p=document.getElementById('imagen');
+        let texto = "<img src = 'elevator_abrir.jpg' />"
+        p.innerHTML = texto;
+    }
+    imagenCerrarPuerta(){
+        let p = document.getElementById('imagen');
+        let texto = "<img src = 'elevator_cerrar.jpg' />"
+        p.innerHTML = texto;
 
-    abrir() {
-        
+    }
+
+
+
+    abrirPuerta() {        
         if(this._puerta != true){
             this._puerta = true;
+
+            this.imagenAbrirPuerta();
             console.log('La puerta se abrio exitosamente');
+        
         }
     }
-    cerrar(){
+    cerrarPuerta(){
         this._puerta = false;
         if(this._puerta == false){
-            console.log('La puerta se cerro exitosamente');
+            this.imagenCerrarPuerta()
         }
     }
 }

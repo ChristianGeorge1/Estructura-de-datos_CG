@@ -4,11 +4,12 @@ class Main{
         let elevador = new Elevador(10);
 
         document.getElementById('btnAbrir').addEventListener('click',()=>{
-            elevador.abrir();
+            elevador.abrirPuerta();
+
         })
 
         document.getElementById('btnCerrar').addEventListener('click',()=>{
-            elevador.cerrar();
+            elevador.cerrarPuerta();
 
         })
 
