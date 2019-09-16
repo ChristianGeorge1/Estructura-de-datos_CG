@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sistema de información</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="jumbotron">
+        <h1 class="display-4">Gestor de información</h1>
+        <p class="lead">Toda la información de los articulos la encuentras aquí. </p>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-4 ">
+                <form action="">
+
+                    <div class="form-group">
+                        <label for="codigo">Código: </label>
+                        <input type="text" id="codigo" class="form-control" placeholder="2">
+                        <small id="ayudaCodigo">El código es único en cada articulo</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nombre">Nombre: </label>
+                        <input type="text" id="nombre" class="form-control" placeholder="Lala">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="precio">Precio: </label>
+                        <input type="number" id="precio" class="form-control" placeholder="$$$"> 
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cantidad">Cantidad: </label>
+                        <input type="number" id="cantidad" class="form-control" placeholder="30">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descripcion">Descripción: </label>
+                        <textarea id="descripcion" cols="30" rows="10" class="form-control"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="button" id="btnAgregar" class="btn btn-primary">Agregar</button>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="col s12 col-md-8 mt-3">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Descripción</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <!--ARTICULO
+codigo
+nombre
+precio
+cantidad
+descripcion
+toString();-->
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    <script src="Main.js" type="module"></script>
+</body>
+
+</html>
