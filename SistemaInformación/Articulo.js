@@ -1,11 +1,10 @@
 export default class Articulo{
-    constructor(codigo, nombre, precio, cantidad, descripcion){
-        this._codigo = codigo;
-        this._nombre = nombre; 
-        this._precio = precio;
-        this._cantidad = cantidad;
-        this._descripcion = descripcion;
-        this._articulos = [];
+    constructor(articulo){
+        this._codigo = articulo.codigo;
+        this._nombre = articulo.nombre; 
+        this._precio = articulo.precio;
+        this._cantidad = articulo.cantidad;
+        this._descripcion = articulo.descripcion;
 
     }
 
@@ -25,8 +24,7 @@ export default class Articulo{
         return this._descripcion;
     }
 
-    agregarArticulos(){
-        this._articulos.push();
-        return this._articulos;
+    toString(){
+        return console.log(this._articulos);
     }
 }

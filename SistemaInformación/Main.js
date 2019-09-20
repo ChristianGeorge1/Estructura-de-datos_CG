@@ -1,8 +1,9 @@
 import Articulo from './Articulo.js'
+import Tabla from './Tabla.js';
 
 class Main {
     constructor() {
-
+        let tabla = new Tabla(document.getElementById('tablaInfo'))
         document.getElementById('btnAgregar').addEventListener('click', () => {
 
             let codigo = document.getElementById('codigo').value;
@@ -11,13 +12,17 @@ class Main {
             let cantidad = document.getElementById('cantidad').value;
             let descripcion = document.getElementById('descripcion').value;
 
-            let articulo = new Articulo(codigo, nombre, precio, cantidad, descripcion)
+            let objArticulo = {
+                codigo: codigo,
+                nombre: nombre,
+                precio: precio,
+                cantidad: cantidad,
+                descripcion: descripcion
+            };
 
-            
-            articulo.agregarArticulos();            
-            console.log(articulo);
-
-        })
+            let articulo = new Articulo(objArticulo);
+            tabla.añadesArticulo(articulo);
+       })
     }
 }
 
