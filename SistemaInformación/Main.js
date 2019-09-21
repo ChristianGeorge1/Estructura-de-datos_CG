@@ -22,7 +22,14 @@ class Main {
 
             let articulo = new Articulo(objArticulo);
             tabla.añadesArticulo(articulo);
-       })
+        })
+       let btnBuscador = document.getElementById('btnBuscador');
+
+       btnBuscador.addEventListener('click', () =>{
+        tabla.buscarArticulo2(codigo);
+
+    })
+
     }
 }
 
