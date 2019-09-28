@@ -36,11 +36,11 @@ export default class Tabla {
         };
         this._articulos.push(objArticulo);
     }
-    reporte(row, articulo){
+    reporte(row, articulo) {
         Swal.fire({
             type: "info",
             title: `Reporte del articulo con el código: ${articulo.codigo}`,
-            text:  `El articulo con el código: ${articulo.codigo}, tiene el nombre de 
+            text: `El articulo con el código: ${articulo.codigo}, tiene el nombre de 
             ${articulo.nombre}, tiene un precio total de: ${articulo.precio} y la cantidad
             de este articulo es de: ${articulo.cantidad}. La breve descripción es de: ${articulo.descripcion} `
         })
@@ -56,7 +56,7 @@ export default class Tabla {
         });
         return resultado;
     }
-    buscarArticulo2(codigo){
+    buscarArticulo2(codigo) {
         let resultado = -1;
         this._articulos.forEach((articulo, index) => {
             if (articulo.codigo === codigo) {
@@ -64,12 +64,12 @@ export default class Tabla {
                 Swal.fire({
                     type: "info",
                     title: `Se encontro tu articulo`,
-                    text: ` Su nombre es: ${articulo.nombre} `
+                    text: ` Su nombre es: ${articulo.nombre}`
                 })
                 return;
             }
         });
-        return resultado; 
+        return resultado;
     }
     eliminacion(row, articulo) {
         Swal.fire({
@@ -106,7 +106,7 @@ export default class Tabla {
         btnReporte.className = "btn btn-success";
 
         btnReporte.addEventListener('click', () => {
-            this.reporte(row ,articulo);
+            this.reporte(row, articulo);
         });
         row.cells[6].innerHTML = "";
         row.cells[6].appendChild(btnReporte);

@@ -23,12 +23,13 @@ class Main {
             let articulo = new Articulo(objArticulo);
             tabla.añadesArticulo(articulo);
         })
-       let btnBuscador = document.getElementById('btnBuscador');
+        let btnBuscador = document.getElementById('btnBuscar');
 
-       btnBuscador.addEventListener('click', () =>{
-        tabla.buscarArticulo2(codigo);
+        btnBuscador.addEventListener('click', () => {
+            let codigo = document.getElementById('codigo').value;
+            tabla.buscarArticulo2(codigo);
 
-    })
+        })
 
     }
 }
