@@ -1,0 +1,27 @@
+#fondo {
+    background-image: url(prueba2.jpg);
+    padding: 262.5px 0;
+    text-align: center;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+#fondo:before {
+    content: '';
+    position: absolute;
+    background-color: #000;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0.6
+}
+
+#fondo h1,
+a {
+    font-size: 40px;
+    color: #fff;
+    position: relative;
+}
