@@ -1,7 +1,8 @@
 export default class Tabla {
     constructor(tablaInfo) {
         this._tablaInfo = tablaInfo;
-        this._articulos = [];
+        this._primerArticulo = null;
+        this._ultimoArticulo = null;
     }
 
     get articulos() {
@@ -32,9 +33,30 @@ export default class Tabla {
             nombre: articulo.nombre,
             precio: articulo.precio,
             cantidad: articulo.cantidad,
-            descripcion: articulo.descripcion
+            descripcion: articulo.descripcion,
+            next: articulo.next,
+            back: articulo.back
         };
-        this._articulos.push(objArticulo);
+
+        if (this._primerArticulo == null) {
+            this._primerArticulo = objArticulo;
+            this._ultimoArticulo = objArticulo;
+        } else {
+            var registro = this._ultimoArticulo;
+            this._ultimoArticulo.next = objArticulo;
+            this._ultimoArticulo = objArticulo;
+            this._ultimoArticulo.back = registro;
+        }
+        console.log(registro);
+
+    }
+    añadesArticulo(articulo) {
+        this.añadesTabla(articulo);
+        Swal.fire({
+            type: "success",
+            title: "Correcto",
+            text: "Articulo guardado con éxito"
+        });
     }
     reporte(row, articulo) {
         Swal.fire({
@@ -45,48 +67,32 @@ export default class Tabla {
             de este articulo es de: ${articulo.cantidad}. La breve descripción es de: ${articulo.descripcion} `
         })
     }
-
     buscarArticulo(codigo) {
-        let resultado = -1;
-        this._articulos.forEach((articulo, index) => {
-            if (articulo.codigo === codigo) {
-                resultado = index;
-                return;
+        let articulo = this._primerArticulo;
+        while (articulo != null) {
+            if (articulo.codigo == codigo) {
+                return articulo;
             }
-        });
-        return resultado;
+        }
+        articulo = articulo.next;
+
     }
-    buscarArticulo2(codigo) {
-        let resultado = -1;
-        this._articulos.forEach((articulo, index) => {
-            if (articulo.codigo === codigo) {
-                resultado = index;
-                Swal.fire({
-                    type: "info",
-                    title: `Se encontro tu articulo`,
-                    text: ` Su nombre es: ${articulo.nombre}`
-                })
-                return;
-            }
-        });
-        return resultado;
-    }
-    eliminacion(row, articulo) {
-        Swal.fire({
-            type: "question",
-            title: `¿Deseas eliminar el articulo con este código: ${articulo.codigo}?`,
-            text: `Si lo eliminas no habra cambios para retroceder`,
-            showCancelButton: true,
-            confirmButtonText: "Sí",
-            cancelButtonText: "No"
-        }).then(resultado => {
-            if (resultado.value) {
-                let a = this.buscarArticulo(articulo.codigo);
-                this._articulos.splice(a, 1);
-                row.remove();
-            }
-        })
-    }
+    eliminacion(row, articulo, codigo) {
+            Swal.fire({
+                type: "question",
+                title: `¿Deseas eliminar el articulo con este código: ${articulo.codigo}?`,
+                text: `Si lo eliminas no habra cambios para retroceder`,
+                showCancelButton: true,
+                confirmButtonText: "Sí",
+                cancelButtonText: "No"
+            }).then(resultado => {
+                let articulE = this.buscarArticulo(codigo);
+                let articulo = articulE.back;
+
+                articulo.next = articulE.next;
+            })
+        }
+        //Añades los botones de eliminar y el de reporte
     _añadirBtnEliminar(row, articulo) {
         let btnEliminar = document.createElement("input");
         btnEliminar.type = "button";
@@ -111,33 +117,4 @@ export default class Tabla {
         row.cells[6].innerHTML = "";
         row.cells[6].appendChild(btnReporte);
     }
-
-
-    añadesArticulo(articulo) {
-        if (this.buscarArticulo(articulo.codigo) >= 0) {
-            Swal.fire({
-                type: "error",
-                title: "Error",
-                text: `Ya existe un articulo con este código, es el código: ${articulo.codigo}`
-            });
-            return;
-        }
-
-        this.añadesTabla(articulo);
-
-        Swal.fire({
-            type: "success",
-            title: "Correcto",
-            text: "Articulo guardado con éxito"
-        });
-    }
-
-
-
-
-
-
-
-
-
 }
