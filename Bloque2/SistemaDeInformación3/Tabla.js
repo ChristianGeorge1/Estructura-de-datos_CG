@@ -27,37 +27,25 @@ export default class Tabla {
         celdaDescripcion.innerHTML = articulo.descripcion;
         this._añadirBtnEliminar(row, articulo);
         this._añadirBtnReporte(row, articulo);
-
-        let objArticulo = {
-            codigo: articulo.codigo,
-            nombre: articulo.nombre,
-            precio: articulo.precio,
-            cantidad: articulo.cantidad,
-            descripcion: articulo.descripcion,
-            next: articulo.next,
-            back: articulo.back
-        };
-
-        if (this._primerArticulo == null) {
-            this._primerArticulo = objArticulo;
-            this._ultimoArticulo = objArticulo;
-        } else {
-            var registro = this._ultimoArticulo;
-            this._ultimoArticulo.next = objArticulo;
-            this._ultimoArticulo = objArticulo;
-            this._ultimoArticulo.back = registro;
-        }
-        console.log(registro);
-
     }
     añadesArticulo(articulo) {
-        this.añadesTabla(articulo);
+
+        if (this._primerArticulo == null) {
+            this._primerArticulo = articulo;
+        } else {
+            this._ultimoArticulo._next = articulo;
+        }
+        this._ultimoArticulo = articulo;
+        console.log(this._primerArticulo);
+
         Swal.fire({
             type: "success",
             title: "Correcto",
             text: "Articulo guardado con éxito"
         });
+        this.añadesTabla(articulo);
     }
+
     reporte(row, articulo) {
         Swal.fire({
             type: "info",
@@ -68,14 +56,20 @@ export default class Tabla {
         })
     }
     buscarArticulo(codigo) {
-        let articulo = this._primerArticulo;
-        while (articulo != null) {
-            if (articulo.codigo == codigo) {
-                return articulo;
+        if (this._primerArticulo != null) {
+            let encontrado = false;
+            let temp = this._primerArticulo;
+            while (!encontrado && temp != null) {
+                if (codigo == temp.codigo) {
+                    encontrado = true;
+                } else {
+                    temp = temp.next;
+                }
             }
+            return temp;
+        } else {
+            return null;
         }
-        articulo = articulo.next;
-
     }
     eliminacion(row, articulo, codigo) {
             Swal.fire({
@@ -86,10 +80,8 @@ export default class Tabla {
                 confirmButtonText: "Sí",
                 cancelButtonText: "No"
             }).then(resultado => {
-                let articulE = this.buscarArticulo(codigo);
-                let articulo = articulE.back;
-
-                articulo.next = articulE.next;
+                let find = this.buscarArticulo(codigo);
+                this._primerArticulo.next.next = find;
             })
         }
         //Añades los botones de eliminar y el de reporte

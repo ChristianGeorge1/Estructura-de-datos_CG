@@ -27,7 +27,7 @@ class Main {
 
         btnBuscador.addEventListener('click', () => {
             let codigo = document.getElementById('codigo').value;
-            tabla.buscarArticulo2(codigo);
+            tabla.buscarArticulo(codigo);
 
         })
 
