@@ -73,31 +73,52 @@ export default class Tabla {
         }
     }
     eliminacion(row, articulo, codigo) {
-        Swal.fire({
-            type: "question",
-            title: `¿Deseas eliminar el articulo con este código: ${articulo.codigo}?`,
-            text: `Si lo eliminas no habra cambios para retroceder`,
-            showCancelButton: true,
-            confirmButtonText: "Sí",
-            cancelButtonText: "No"
-        }).then(resultado => {
+            Swal.fire({
+                type: "question",
+                title: `¿Deseas eliminar el articulo con este código: ${articulo.codigo}?`,
+                text: `Si lo eliminas no habra cambios para retroceder`,
+                showCancelButton: true,
+                confirmButtonText: "Sí",
+                cancelButtonText: "No"
+            }).then(resultado => {
+                let find = this.buscarArticulo(codigo);
+                let temp = find.back;
 
-            let find = this.buscarArticulo(codigo);
-            if (find != this._primerArticulo.codigo) {
-                this._primerArticulo = this._primerArticulo.next;
-            }
-            console.log(this._primerArticulo);
+                find.next.back = temp;
+                temp.next = find.next;
 
-        })
-    }
-    invertir() {
-            while (this._primerArticulo != null) {
-                this._primerArticulo.next = this._ultimoArticulo;
-            }
-            console.log(this._primerArticulo);
+                console.log(this._primerArticulo);
 
+
+            })
         }
-        //Añades los botones de eliminar y el de reporte
+        //Agregar y ordenar 
+
+    agregarOrdenar(articuloR) {
+        let articulo = articuloR;
+        let aux = this._primerArticulo;
+
+        if (articulo.codigo < this._primerArticulo.codigo) {
+            articulo.next = this._primerArticulo;
+            this._primerArticulo.back = articulo;
+            this._primerArticulo = articulo;
+        } else if (this._ultimoArticulo.codigo < articulo.codigo) {
+            articulo.back = this._ultimoArticulo;
+            this._ultimoArticulo.next = articulo;
+            this._ultimoArticulo = articulo;
+        } else {
+            while (aux.next != null) {
+                if (aux.codigo < articulo.codigo) {
+                    articulo.next = aux.next;
+                    articulo.back = aux;
+                }
+                aux = aux.next;
+            }
+        }
+        this._ultimoArticulo = aux;
+    }
+
+    //Añades los botones de eliminar y el de reporte
     _añadirBtnEliminar(row, articulo) {
         let btnEliminar = document.createElement("input");
         btnEliminar.type = "button";
